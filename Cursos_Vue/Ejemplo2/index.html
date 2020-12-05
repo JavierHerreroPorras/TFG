@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <button @click="changeVisibility">Mostrar/Ocultar</button>
+        <!--
+            <ul v-if="mostrar">
+            <li v-for= "(show, index) in tvshows" :key="index">
+                <strong>{{ show.name }}</strong> {{ show.seasons }} Temporadas
+            </li>
+
+            <tv-show 
+                v-for="(show, index) in tvshows" 
+                :key="index"
+                :name= "show.name"
+                :seasons= "show.seasons">
+            </tv-show>
+
+            </ul>
+        -->
+
+        <tv-show-list></tv-show-list>
+
+        <!--
+            <div v-else="mostrar">
+            No hay datos
+            </div>
+        -->
+        
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.0/vue.js"></script>
+    <script src = "js/script.js"></script>
+
+    <!-- 
+        IMPORTANTE
+            Directivas en VueJS:
+        
+                v-for
+                v-if y v-else
+                v-show y v-hide
+                v-on
+                v-bind
+
+            Eventos y metodos:
+
+                click
+
+            Componentes:
+
+                nomenclatura nombre (separado por '-')
+                data (devuelve los datos como una funcion)
+                template (codigo HTML que genera el componente. Importante v-bind. Puede englobar otros componentes)
+                props
+
+    -->
+
+
+</body>
+</html>
