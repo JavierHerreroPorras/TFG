@@ -1,4 +1,4 @@
-# Apuntes curso Markdown
+# Apuntes curso VueJS
 
 ## Instancia de Vue
 
