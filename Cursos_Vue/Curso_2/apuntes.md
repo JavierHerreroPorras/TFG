@@ -73,7 +73,81 @@ Etapas:
 - beforeDestroy: se ejecuta antes de destruir la instancia (this.$destroy())
 - destroyed: se ejecuta cuando se destruye la instancia de Vue. El sitio queda con el mismo contenido, pero ya no podemos interactuar con el mismo.
 
+## Componentes
 
+Los componentes son instancias reutilizables de Vue con un nombre. Se inicializan mediante la expresión:
+~~~
+Vue.component('nombre',{})
+~~~
+
+Y se invoca en el código HTML como una etiqueta. Un componente siempre tiene un template. Cada componente que creemos tiene que estar dentro del componente sobre el que se monta la instancia. Al utilizar un template, tenemos que utilizar un div como contenedor de lo que declaremos en el mismo.
+
+Además, podemos declarar datos dentro del mismo, mediante la propiedad *data*. Pero, a diferencia de la instancia de Vue, los datos se devuelven mediate una función, como en la siguiente expresión:
+~~~
+Vue.component('contador',{
+    template: //html
+    `
+    <div>
+        <h3>{{numero}}</h3>
+        <button @click="numero++">+<button>
+    </div>
+    `,
+    data(){
+        return {
+            numero: 0
+        }
+    }
+})
+~~~
+
+### Comunicación entre componentes
+
+Imaginamos el siguiente componente, en el cual el componente padre pasa al componente hijo un numero, mediante v-bind: (o su forma abreviada :). Este numero se recibe en el componente hijo y se refleja:
+
+~~~
+Vue.component('padre',{
+
+    template: /*html*/
+    `
+    <div class = "p-5 bg-dark text-white">
+        <h2>Componente Padre: {{numeroPadre}}</h2>
+        <button class="btn btn-danger" @click="numeroPadre++">+</button>
+        {{nombrePadre}}
+        <hijo v-bind:numero="numeroPadre" @nombreHijo="nombrePadre = $event"></hijo>
+    </div>
+    `,
+    data(){
+        return{
+            numeroPadre: 0,
+            nombrePadre: ''
+        }
+    }
+});
+~~~
+
+El componente hijo cuenta con unas props (atributos personalizados), donde almacena los datos que recibe desde el padre y posteriormente los refleja en la página. Por otra parte, para pasar parámetros al componente padre, utiliza eventos una vez que se ha montado - *mounted* (this.$emit('nombreHijo',this.nombre)). Este parámetro lo recibe el padre mediante v-on: o su forma abreviada @ (@nombreHijo="nombrePadre = $event"). Pero existen varios problemas al trabajar con los datos pasados de padres a hijos y viceversa (Los parámetros recibidos no se pueden modificar). Por ello surge Vuex:
+~~~
+Vue.component('hijo', {
+
+    template: /*html*/
+    `
+    <div class="py-5 bg-success">
+        <h4>Componente hijo: {{numero}}</h4>
+        <h4>Nombre: {{nombre}}</h4>
+    </div>
+    `,
+    props: ['numero'],
+    data(){
+        return{
+            nombre: 'Javier',
+        }
+    },
+    mounted() {
+        this.$emit('nombreHijo',this.nombre);
+    },
+
+});
+~~~
 
 
 
