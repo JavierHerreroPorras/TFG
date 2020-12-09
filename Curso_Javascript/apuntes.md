@@ -184,6 +184,13 @@ console.log(enlaceYT)
 const {enlace, nombre} = web.redesSociales.youtube
 console.log(enlace)
 console.log(nombre)
+
+//Para recorrer el array de objetos, podemos utilizar: 
+const arrayObjetos = [{nombre: 'Juan', edad: 32}, {nombre: 'Clara', edad: 21}, {nombre: 'Flora}, edad 41}];
+
+arrayObjetos.forEach(element => {
+    console.log(element.nombre)
+});
 ~~~
 
 # Fetch (con APIs)
