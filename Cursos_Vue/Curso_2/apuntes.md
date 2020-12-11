@@ -149,6 +149,52 @@ Vue.component('hijo', {
 });
 ~~~
 
+## Vuex
+
+Vuex es un complemento oficial para Vue.js que ofrece un almacén de datos centralizado para usar dentro de su aplicación.
+
+Dentro de una aplicación Vuex, el almacén de datos contiene todo el estado de la aplicación compartida. Este estado se altera por las mutaciones que se realizan en respuesta a una acción que invoca un evento de mutación a través del despachador.
+
+El esquema de funcionamiento de Vuex se detalla en la siguiente imagen:
+![Texto alternativo](im.png)
+
+El funcionamiento de Vuex se basa en un objeto **Store**, un contenedor que almacena el estado de la aplicación. Este objeto contiene los siguientes elementos:
+~~~
+const store = new Vuex.Store({
+    state: {
+        numero: 10,
+        cursos: [],
+    },
+    mutations: {
+        aumentar(state){
+            state.numero++;
+        },
+        disminuir(state,n){
+            state.numero -= n;
+        },
+        llenarCursos(state,cursosAccion){
+            state.cursos = cursosAccion
+        }
+    },
+    actions: {
+        obtenerCursos: async function({commit}) {
+            const data = await fetch('cursos.json');
+            const cursos = await data.json();
+            // Hacemos un commit que llama a la mutacion llenarCursos, que recibe el objeto de cursos (los datos del json)
+            commit('llenarCursos',cursos);
+
+        }
+    }
+});
+~~~
+
+Básicamente, almacenamos los datos en **state**. Para cambiar el *state* en un contenedor de Vuex, se necesita una **mutation** (donde se identifican por un nombre *aumentar* y una función *handler* la cual realiza el cambio en el *state* del contenedor). Para llevar a cabo una *mutation*, se utilizan las **actions**, las cuales permiten invocar a las distintas mutaciones del contenedor de Vuex (y pueden ser asíncronas). Para ello se utilizará un **commit**.
+
+
+En definitiva, y de acuerdo a la imagen anterior, cada componente de Vue pueden invocar una serie de acciones (*actions*), las cuales llaman a su vez a una serie de mutaciones (*mutations*) que provocan un cambio en el estado (*state*) de los componentes de Vue, los cuales se renderizan (al ser reactivos) para mostrar al usuario los últimos cambios realizados.
+
+
+
 
 
 
