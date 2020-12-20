@@ -1,0 +1,18 @@
+[
+    {
+        "Nombre": "Miguel",
+        "Apellidos": "Sánchez",
+        "Edad": 35,
+        "Aficiones": [
+            "Música",
+            "Ciclismo",
+            "Trekking"
+        ]
+},
+
+    {
+        "Nombre": "Pepe Álvarez",
+        "Edad": 34,
+        "Vehículo": "Seat León"
+    }
+]
