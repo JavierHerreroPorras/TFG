@@ -22,7 +22,7 @@ const UserSchema = new Schema({
 })
 
 //Funciones antes de que el modelo se guarde en la BBDD
-UserSchema.pre('save', (next) => {
+UserSchema.pre('save', function(next) {
     const user = this;
     if (!user.isModified('password')) return next()
 
